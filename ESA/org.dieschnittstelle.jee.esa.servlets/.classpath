@@ -24,11 +24,11 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry combineaccessrules="false" kind="src" path="/org.dieschnittstelle.jee.esa.shared.entities.crm"/>
 	<classpathentry kind="lib" path="lib/jbossall-client-3.2.3.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.dieschnittstelle.jee.esa.shared.ejbmodule.crm"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
