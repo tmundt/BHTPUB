@@ -58,6 +58,7 @@ public class Constants {
 		TOUCHPOINT_2 = new StationaryTouchpoint(-1, "U Leopoldplatz", addr2);
 		
 		TOUCHPOINT_3 = new MobileTouchpoint("01778896571");
+		TOUCHPOINT_3.setName("Mobiler Verkaufsstand");
 
 		PRODUCT_1 = new IndividualisedProductItem("Schrippe",	ProductType.ROLL, 720);
 		//PRODUCT_1.setId(1);
