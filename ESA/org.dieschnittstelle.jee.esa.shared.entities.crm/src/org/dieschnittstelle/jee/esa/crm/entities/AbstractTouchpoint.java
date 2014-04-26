@@ -33,7 +33,7 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
  */
 // jaxb annotations
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(namespace = "http://dieschnittstelle.org/jee/esa/crm/model")
+@XmlType(namespace = "http://dieschnittstelle.org/jee/esa/crm/entities")
 @XmlSeeAlso({StationaryTouchpoint.class,MobileTouchpoint.class})
 
 // jpa annotations

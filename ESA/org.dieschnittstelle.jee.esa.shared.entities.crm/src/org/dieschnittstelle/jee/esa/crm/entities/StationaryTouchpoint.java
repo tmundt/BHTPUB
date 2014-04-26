@@ -23,7 +23,7 @@ import org.jboss.logging.Logger;
  * @author kreutel
  */
 @XmlAccessorType(XmlAccessType.PROPERTY)
-@XmlType(namespace = "http://dieschnittstelle.org/jee/esa/crm/model")
+@XmlType(namespace = "http://dieschnittstelle.org/jee/esa/crm/entities")
 @Entity
 @DiscriminatorValue("stationary")
 public class StationaryTouchpoint extends AbstractTouchpoint  implements Serializable {
