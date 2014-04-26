@@ -45,4 +45,38 @@ public class TouchpointWebServiceServlet extends HttpServlet {
 
 	}
 	
+	/*
+	@Override	
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) {
+
+		// assume POST will only be used for touchpoint creation, i.e. there is
+		// no need to check the uri that has been used
+
+		// obtain the executor for reading out the touchpoints from the servlet context using the touchpointCRUD attribute
+
+		try {
+			// create an ObjectInputStream from the request's input stream
+		
+			// read an AbstractTouchpoint object from the stream
+		
+			// call the create method on the executor and take its return value
+		
+			// set the response status as successful, using the appropriate
+			// constant from HttpServletResponse
+		
+			// then write the object to the response's output stream, using a
+			// wrapping ObjectOutputStream
+		
+			// ... and write the object to the stream
+		
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+
+	}
+	*/
+
+
+	
 }
