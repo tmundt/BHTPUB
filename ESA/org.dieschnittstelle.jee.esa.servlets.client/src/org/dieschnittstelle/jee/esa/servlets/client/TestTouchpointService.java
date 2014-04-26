@@ -142,7 +142,43 @@ public class TestTouchpointService {
 			AbstractTouchpoint tp) {
 		logger.info("createNewTouchpoint(): " + tp);
 
-		return null;
+		try {
+
+			// create post request for the api/touchpoints uri
+
+			// create an ObjectOutputStream from a ByteArrayOutputStream - the
+			// latter must be accessible via a variable
+
+			// write the object to the output stream
+
+			// create a ByteArrayEntity and pass it the byte array from the
+			// output stream
+
+			// set the entity on the request
+
+			// execute the request, which will return a HttpResponse object
+
+			// log the status line
+			
+			// evaluate the result using getStatusLine(), use constants in
+			// HttpStatus			
+				
+			/* if successful: */
+
+			// create an object input stream using getContent() from the
+			// response entity (accessible via getEntity())
+
+			// read the touchpoint object from the input stream
+
+			// cleanup the request
+			// EntityUtils.consume(response.getEntity());
+
+			return null;
+		} catch (Exception e) {
+			logger.error("got exception: " + e,e);
+			throw new RuntimeException(e);
+		}
+
 		
 	}
 	
