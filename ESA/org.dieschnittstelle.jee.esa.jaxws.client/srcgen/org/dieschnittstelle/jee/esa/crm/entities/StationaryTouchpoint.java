@@ -15,7 +15,7 @@ import org.dieschnittstelle.jee.esa.jaxws.Address;
  * <pre>
  * &lt;complexType name="stationaryTouchpoint">
  *   &lt;complexContent>
- *     &lt;extension base="{http://dieschnittstelle.org/jee/esa/crm/model}abstractTouchpoint">
+ *     &lt;extension base="{http://dieschnittstelle.org/jee/esa/crm/entities}abstractTouchpoint">
  *       &lt;sequence>
  *         &lt;element name="location" type="{http://dieschnittstelle.org/jee/esa/jaxws}address" minOccurs="0"/>
  *       &lt;/sequence>

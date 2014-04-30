@@ -40,6 +40,14 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link MobileTouchpoint }
+     * 
+     */
+    public MobileTouchpoint createMobileTouchpoint() {
+        return new MobileTouchpoint();
+    }
+
+    /**
      * Create an instance of {@link Location }
      * 
      */
@@ -53,6 +61,30 @@ public class ObjectFactory {
      */
     public Address createAddress() {
         return new Address();
+    }
+
+    /**
+     * Create an instance of {@link CrmProductBundle }
+     * 
+     */
+    public CrmProductBundle createCrmProductBundle() {
+        return new CrmProductBundle();
+    }
+
+    /**
+     * Create an instance of {@link CustomerTransaction }
+     * 
+     */
+    public CustomerTransaction createCustomerTransaction() {
+        return new CustomerTransaction();
+    }
+
+    /**
+     * Create an instance of {@link Customer }
+     * 
+     */
+    public Customer createCustomer() {
+        return new Customer();
     }
 
     /**
