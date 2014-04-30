@@ -12,7 +12,9 @@
 	<listener>
 		<listener-class>org.dieschnittstelle.jee.esa.servlets.TouchpointServletContextListener</listener-class>
 	</listener>
-    
+    <listener>
+		<listener-class>org.dieschnittstelle.jee.esa.servlets.ProductServletContextListener</listener-class>
+	</listener>
     
 	<!--  JK: taken from http://www.packtpub.com/article/restful-web-service-implementation-with-resteasy -->
 	<!--  for using resteasy, just copy&paste the following section as a whole and adapt the URL pattern (see comment below) -->
