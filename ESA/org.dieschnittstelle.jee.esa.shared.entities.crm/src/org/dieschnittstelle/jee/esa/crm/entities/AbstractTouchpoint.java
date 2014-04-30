@@ -23,6 +23,7 @@ import javax.xml.bind.annotation.XmlType;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
+import org.dieschnittstelle.jee.esa.entities.GenericCRUDEntity;
 
 /**
  * this is an abstraction over different touchpoints (with pos being the most
@@ -47,7 +48,7 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 
 // jaxrs/jackson annotations
 @JsonTypeInfo(use=JsonTypeInfo.Id.CLASS, include=JsonTypeInfo.As.PROPERTY, property="@class")
-public abstract class AbstractTouchpoint implements Serializable {
+public abstract class AbstractTouchpoint implements Serializable, GenericCRUDEntity {
 
 	/**
 	 * 
