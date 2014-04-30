@@ -4,9 +4,11 @@ import java.io.File;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-
-import org.jboss.logging.Logger;
 import javax.servlet.annotation.WebListener;
+
+import org.dieschnittstelle.jee.esa.crm.entities.AbstractTouchpoint;
+import org.dieschnittstelle.jee.esa.entities.GenericCRUDExecutor;
+import org.jboss.logging.Logger;
 
 @WebListener
 public class TouchpointServletContextListener implements ServletContextListener {
@@ -19,7 +21,7 @@ public class TouchpointServletContextListener implements ServletContextListener 
 		logger.info("contextDestroyed()");
 
 		// we read out the TouchpointCRUDExecutor and let it store its content
-		TouchpointCRUDExecutor exec = (TouchpointCRUDExecutor) evt
+		GenericCRUDExecutor<AbstractTouchpoint> exec = (GenericCRUDExecutor<AbstractTouchpoint>) evt
 				.getServletContext().getAttribute("touchpointCRUD");
 
 		logger.info("contextDestroyed(): loaded executor from context: " + exec);
@@ -38,7 +40,8 @@ public class TouchpointServletContextListener implements ServletContextListener 
 
 		// we create a new executor for a file to be stored in the context root
 		String rootPath = evt.getServletContext().getRealPath("/");
-		TouchpointCRUDExecutor exec = new TouchpointCRUDExecutor(new File(
+		
+		GenericCRUDExecutor<AbstractTouchpoint> exec = new GenericCRUDExecutor<AbstractTouchpoint>(new File(
 				rootPath, "touchpoints.data"));
 
 		// we call load() on the executor to load any exsisting data (if there

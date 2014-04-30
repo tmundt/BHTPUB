@@ -14,7 +14,7 @@ import javax.xml.ws.handler.MessageContext;
 
 import org.dieschnittstelle.jee.esa.crm.entities.AbstractTouchpoint;
 import org.dieschnittstelle.jee.esa.crm.entities.StationaryTouchpoint;
-import org.dieschnittstelle.jee.esa.servlets.TouchpointCRUDExecutor;
+import org.dieschnittstelle.jee.esa.entities.GenericCRUDExecutor;
 import org.jboss.logging.Logger;
 
 @WebService(targetNamespace = "http://dieschnittstelle.org/jee/esa/jaxws", serviceName = "TouchpointCRUDWebService")
@@ -58,7 +58,7 @@ public class TouchpointCRUDWebServiceSOAP {
 				.getMessageContext().get(MessageContext.SERVLET_REQUEST);
 		logger.info("readAllTouchpoints(): servlet request is: " + httpRequest);
 
-		TouchpointCRUDExecutor touchpointCRUD = (TouchpointCRUDExecutor) ctx
+		GenericCRUDExecutor<AbstractTouchpoint> touchpointCRUD = (GenericCRUDExecutor<AbstractTouchpoint>) ctx
 				.getAttribute("touchpointCRUD");
 		logger.info("readAllTouchpoints(): read touchpointCRUD from servletContext: "
 				+ touchpointCRUD);
@@ -71,28 +71,28 @@ public class TouchpointCRUDWebServiceSOAP {
 //			e.printStackTrace();
 //		}
 
-		return touchpointCRUD.readAllTouchpoints();
+		return touchpointCRUD.readAllObjects();
 	}
 
 	@WebMethod
 	public AbstractTouchpoint createTouchpoint(AbstractTouchpoint touchpoint) {
 		// obtain the CRUD executor from the servlet context
-		TouchpointCRUDExecutor touchpointCRUD = (TouchpointCRUDExecutor) ((ServletContext) wscontext
+		GenericCRUDExecutor<AbstractTouchpoint> touchpointCRUD = (GenericCRUDExecutor<AbstractTouchpoint>) ((ServletContext) wscontext
 				.getMessageContext().get(MessageContext.SERVLET_CONTEXT))
 				.getAttribute("touchpointCRUD");
 
 		return (StationaryTouchpoint) touchpointCRUD
-				.createTouchpoint(touchpoint);
+				.createObject(touchpoint);
 	}
 
 	@WebMethod
 	public boolean deleteTouchpoint(int id) {
 		// obtain the CRUD executor from the servlet context
-		TouchpointCRUDExecutor touchpointCRUD = (TouchpointCRUDExecutor) ((ServletContext) wscontext
+		GenericCRUDExecutor<AbstractTouchpoint> touchpointCRUD = (GenericCRUDExecutor<AbstractTouchpoint>) ((ServletContext) wscontext
 				.getMessageContext().get(MessageContext.SERVLET_CONTEXT))
 				.getAttribute("touchpointCRUD");
 
-		return touchpointCRUD.deleteTouchpoint(id);
+		return touchpointCRUD.deleteObject(id);
 	}
 	
 	/*
