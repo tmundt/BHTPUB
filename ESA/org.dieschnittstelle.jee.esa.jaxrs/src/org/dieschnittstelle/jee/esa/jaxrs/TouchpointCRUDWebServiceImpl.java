@@ -9,7 +9,7 @@ import javax.ws.rs.core.Context;
 import org.apache.log4j.Logger;
 import org.dieschnittstelle.jee.esa.crm.entities.StationaryTouchpoint;
 import org.dieschnittstelle.jee.esa.crm.entities.AbstractTouchpoint;
-import org.dieschnittstelle.jee.esa.servlets.TouchpointCRUDExecutor;
+import org.dieschnittstelle.jee.esa.entities.GenericCRUDExecutor;
 
 public class TouchpointCRUDWebServiceImpl implements ITouchpointCRUDWebService {
 	
@@ -18,7 +18,7 @@ public class TouchpointCRUDWebServiceImpl implements ITouchpointCRUDWebService {
 	/**
 	 * this accessor will be provided by the ServletContext, to which it is written by the TouchpointServletContextListener
 	 */
-	private TouchpointCRUDExecutor touchpointCRUD;
+	private GenericCRUDExecutor<AbstractTouchpoint> touchpointCRUD;
 	
 	/**
 	 * here we will be passed the context parameters by the resteasy framework
@@ -28,7 +28,7 @@ public class TouchpointCRUDWebServiceImpl implements ITouchpointCRUDWebService {
 	public TouchpointCRUDWebServiceImpl(@Context ServletContext servletContext, @Context HttpServletRequest request) {
 		logger.info("<constructor>: " + servletContext + "/" + request);
 		// read out the dataAccessor
-		this.touchpointCRUD = (TouchpointCRUDExecutor)servletContext.getAttribute("touchpointCRUD");
+		this.touchpointCRUD = (GenericCRUDExecutor<AbstractTouchpoint>)servletContext.getAttribute("touchpointCRUD");
 		
 		logger.debug("read out the touchpointCRUD from the servlet context: " + this.touchpointCRUD);		
 	}
@@ -36,17 +36,17 @@ public class TouchpointCRUDWebServiceImpl implements ITouchpointCRUDWebService {
 
 	@Override
 	public List<StationaryTouchpoint> readAllTouchpoints() {
-		return (List)this.touchpointCRUD.readAllTouchpoints();
+		return (List)this.touchpointCRUD.readAllObjects();
 	}
 
 	@Override
 	public StationaryTouchpoint createTouchpoint(StationaryTouchpoint touchpoint) {
-		return (StationaryTouchpoint)this.touchpointCRUD.createTouchpoint(touchpoint);	
+		return (StationaryTouchpoint)this.touchpointCRUD.createObject(touchpoint);	
 	}
 
 	@Override
 	public boolean deleteTouchpoint(int id) {
-		return this.touchpointCRUD.deleteTouchpoint(id);	
+		return this.touchpointCRUD.deleteObject(id);	
 	}
 
 	/*
