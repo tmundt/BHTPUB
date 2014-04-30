@@ -18,11 +18,17 @@ public class CreateProducts {
 			
 			// UE JPA3: lookup eines Remote Interface fuer CRUD bezueglich AbstractProduct
 			
-			// TODO: server-seitige Erzeugung von PRODUCT_1/2 und CAMPAIGN_1/2 durch Aufruf der Methoden des Remote Interface
-			// PRODUCT_1 = ...
-			// PRODUCT_2 = ...
-			// CAMPAIGN_1 = ...
-			// CAMPAIGN_2 = ...
+			// server-seitige Erzeugung von PRODUCT_1/2 und CAMPAIGN_1/2 durch Aufruf der Methoden des Remote Interface und Uebertragung der durch den Server vergebenen ids auf den Rueckgabewerten in die Werte der Konstanten
+			// Constants.PRODUCT_1.setId(productCRUD.createProduct(Constants.PRODUCT_1).getId());
+			// Constants.PRODUCT_2.setId(...);
+			// Constants.CAMPAIGN_1.setId(...);
+			// Constants.CAMPAIGN_2.setId(...);
+			
+			// Loeschen von CAMPAIGN_2
+			
+			// Aendern des Namens von PRODUCT_1 auf "Schusterjunge"
+			
+			// Auslesen aller Produkte
 			
 			if (args.length == 0) {
 				System.err.println("CreateProducts: done.\n");
