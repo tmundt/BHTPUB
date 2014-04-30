@@ -23,5 +23,5 @@ import org.dieschnittstelle.jee.esa.erp.entities.IndividualisedProductItem;
  * UE JRS3: aendern Sie den Rueckgabetyp der Auslese-Methode von List<IndividualisedProductItem> auf List<AbstractProduct> und passen Sie die Implementierung an
  */
 public interface IProductCRUDWebService {
-
+			
 }
