@@ -4,6 +4,7 @@
 	<comment></comment>
 	<projects>
 		<project>org.dieschnittstelle.jee.esa.shared.entities.crm</project>
+		<project>org.dieschnittstelle.jee.esa.shared.entities.erp</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
