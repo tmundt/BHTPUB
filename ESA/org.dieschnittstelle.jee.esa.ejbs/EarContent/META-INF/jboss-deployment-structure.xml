@@ -33,6 +33,9 @@
 				path="lib/org.dieschnittstelle.jee.esa.shared.entities.erp.jar">
 			</resource-root>
 		</resources>
+		<dependencies>
+			<module name="org.apache.commons.lang" />
+		</dependencies>
 	</module>
 	<module
 		name="deployment.org.dieschnittstelle.jee.esa.shared.entities.crm.jar">
