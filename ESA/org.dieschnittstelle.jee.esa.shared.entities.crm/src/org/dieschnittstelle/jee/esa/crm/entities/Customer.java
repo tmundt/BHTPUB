@@ -41,7 +41,7 @@ public class Customer implements Serializable {
 	 */
 	@Id
 	@GeneratedValue
-	private int id = -1;
+	private int id;
 
 	public int getId() {
 		return id;

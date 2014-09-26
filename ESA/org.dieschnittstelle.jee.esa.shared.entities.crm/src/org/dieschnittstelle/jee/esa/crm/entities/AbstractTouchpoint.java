@@ -58,7 +58,7 @@ public abstract class AbstractTouchpoint implements Serializable, GenericCRUDEnt
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "touchpoint_sequence")
-	protected int id = -1;
+	protected int id;
 
 	/**
 	 * the id of the PointOfSale from the erp data

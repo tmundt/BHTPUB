@@ -82,9 +82,15 @@ public class CustomerCRUDStateless implements CustomerCRUDRemote, CustomerCRUDLo
 		
 		return true;
 	}
-	
+
 	/*
-	 * UE JSF3: erstellen Sie eine Methode readCustomerForEmail()
+	 * UE JSF3: implementieren Sie die Methode readCustomerForEmail()
 	 */
+	@Override
+	public Customer readCustomerForEmail(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
 
 }

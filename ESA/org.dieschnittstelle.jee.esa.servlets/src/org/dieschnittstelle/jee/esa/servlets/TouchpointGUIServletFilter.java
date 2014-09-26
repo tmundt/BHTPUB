@@ -34,14 +34,14 @@ public class TouchpointGUIServletFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
 
-		// check whether we have an accept header that allows text/html,
+		// check whether we have a an accept-language header that will be set by the browser but not by the apache http client.
 		// otherwise reject the request
-		String acceptHeader = ((HttpServletRequest) request)
-				.getHeader("accept");
-		logger.info("got acceptHeader: " + acceptHeader);
+		String acceptLanguageHeader = ((HttpServletRequest) request)
+				.getHeader("accept-language");
+		logger.info("got accept-language header: " + acceptLanguageHeader);
 
 		// we do quite a brute force string match
-		if (acceptHeader != null && acceptHeader.contains("text/html")) {
+		if (acceptLanguageHeader != null) {
 			chain.doFilter(request, response);
 		} else {
 			// if we do not find the required header, we block access

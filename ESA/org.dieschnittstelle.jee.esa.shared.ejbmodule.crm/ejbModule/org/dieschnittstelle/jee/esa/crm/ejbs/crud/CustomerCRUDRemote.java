@@ -17,4 +17,6 @@ public interface CustomerCRUDRemote {
 	
 	public boolean deleteCustomer(int id);
 
+	public Customer readCustomerForEmail(String email);
+
 }

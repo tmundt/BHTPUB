@@ -8,10 +8,10 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
-	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.jboss.ide.eclipse.as.core.server.runtime.runtimeTarget/JBoss 7.1 Runtime"/>
 	<classpathentry kind="lib" path="lib/commons-lang-2.6.jar"/>
 	<classpathentry kind="lib" path="lib/jackson-all-1.7.1.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.dieschnittstelle.jee.esa.shared.entities.crm"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.dieschnittstelle.jee.esa.shared.entities.erp"/>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.jboss.ide.eclipse.as.core.server.runtime.runtimeTarget/JBoss 7.1 Runtime"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

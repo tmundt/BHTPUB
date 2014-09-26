@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.dieschnittstelle.jee.esa.erp.entities.IndividualisedProductItem;
 
-public interface StockSystem {
+public interface StockSystemRemote {
 	
 		/**
 		 * adds some units of a product to the stock of a point of sale

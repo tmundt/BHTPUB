@@ -35,7 +35,7 @@ public class CustomerTransaction implements Serializable {
 
 	@Id
 	@GeneratedValue
-	private int id = -1;
+	private int id;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date date;

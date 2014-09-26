@@ -33,7 +33,7 @@ public class CrmProductBundle implements Serializable {
 
 	@Id
 	@GeneratedValue
-	private int id = -1;
+	private int id;
 
 	private int erpProductId;
 

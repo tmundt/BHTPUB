@@ -30,7 +30,7 @@ public class Location implements Serializable {
 	 */
 	private static final long serialVersionUID = -131090102062445239L;
 
-	private int id = -1;
+	private int id;
 	
 	private long geoLat;
 	

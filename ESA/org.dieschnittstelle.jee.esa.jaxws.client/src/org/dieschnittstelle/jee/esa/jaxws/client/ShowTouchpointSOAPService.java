@@ -10,10 +10,10 @@ import org.dieschnittstelle.jee.esa.jaxws.Address;
 import org.dieschnittstelle.jee.esa.jaxws.TouchpointCRUDWebService;
 import org.dieschnittstelle.jee.esa.jaxws.TouchpointCRUDWebServiceSOAP;
 
-public class TestTouchpointSOAPService {
+public class ShowTouchpointSOAPService {
 
 	protected static Logger logger = Logger
-			.getLogger(TestTouchpointSOAPService.class);
+			.getLogger(ShowTouchpointSOAPService.class);
 
 	/**
 	 * @param args

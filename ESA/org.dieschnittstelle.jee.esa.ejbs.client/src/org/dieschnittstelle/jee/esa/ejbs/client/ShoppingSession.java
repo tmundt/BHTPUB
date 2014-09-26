@@ -2,11 +2,7 @@ package org.dieschnittstelle.jee.esa.ejbs.client;
 
 import java.util.List;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-
 import org.apache.log4j.Logger;
-
 import org.dieschnittstelle.jee.esa.crm.ejbs.CampaignTrackingRemote;
 import org.dieschnittstelle.jee.esa.crm.ejbs.CustomerTrackingRemote;
 import org.dieschnittstelle.jee.esa.crm.ejbs.ShoppingCartRemote;
@@ -14,6 +10,9 @@ import org.dieschnittstelle.jee.esa.crm.entities.AbstractTouchpoint;
 import org.dieschnittstelle.jee.esa.crm.entities.CrmProductBundle;
 import org.dieschnittstelle.jee.esa.crm.entities.Customer;
 import org.dieschnittstelle.jee.esa.crm.entities.CustomerTransaction;
+import org.dieschnittstelle.jee.esa.ejbs.client.ejbclients.CampaignTrackingClient;
+import org.dieschnittstelle.jee.esa.ejbs.client.ejbclients.CustomerTrackingClient;
+import org.dieschnittstelle.jee.esa.ejbs.client.ejbclients.ShoppingCartClient;
 import org.dieschnittstelle.jee.esa.erp.entities.AbstractProduct;
 import org.dieschnittstelle.jee.esa.erp.entities.Campaign;
 
@@ -49,18 +48,9 @@ public class ShoppingSession {
 	 */
 	public void initialise() {
 		try {
-			// obtain the beans using a jndi context
-			Context context = new InitialContext();
-			this.campaignTracking = (CampaignTrackingRemote) context
-					.lookup(Constants.CAMPAIGN_TRACKING_BEAN);
-			logger.info("got campaign tracking bean: " + campaignTracking);
-			this.customerTracking = (CustomerTrackingRemote) context
-					.lookup(Constants.CUSTOMER_TRACKING_BEAN);
-			logger.info("got customer tracking bean: " + customerTracking);
-			this.shoppingCart = (ShoppingCartRemote) context
-					.lookup(Constants.SHOPPING_CART_BEAN);
-			logger.info("got shopping cart bean: " + shoppingCart);
-
+			this.campaignTracking = new CampaignTrackingClient();
+			this.customerTracking = new CustomerTrackingClient();
+			this.shoppingCart = new ShoppingCartClient();
 		} catch (Exception e) {
 			throw new RuntimeException("initialise() failed: " + e, e);
 		}
@@ -87,19 +77,21 @@ public class ShoppingSession {
 			throw new RuntimeException(
 					"cannot verify campaigns! No touchpoint has been set!");
 		}
-
+		
 		for (CrmProductBundle productBundle : this.shoppingCart
 				.getProductBundles()) {
 			if (productBundle.isCampaign()) {
-				// we check whether we have sufficient campaign items available
-				if (this.campaignTracking
+				int availableCampaigns = this.campaignTracking
 						.existsValidCampaignExecutionAtTouchpoint(
 								productBundle.getErpProductId(),
-								this.touchpoint) < productBundle.getUnits()) {
+								this.touchpoint);
+				logger.info("got available campaigns for product " + productBundle.getErpProductId() + ": " + availableCampaigns);
+				// we check whether we have sufficient campaign items available
+				if (availableCampaigns < productBundle.getUnits()) {
 					throw new RuntimeException(
 							"verifyCampaigns() failed for productBundle "
 									+ productBundle + " at touchpoint "
-									+ this.touchpoint + "!");
+									+ this.touchpoint + "! Need " + productBundle.getUnits() + " instances of campaign, but only got: " +availableCampaigns);
 				}
 			}
 		}

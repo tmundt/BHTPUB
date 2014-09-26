@@ -12,5 +12,6 @@
 	<classpathentry kind="lib" path="lib/httpmime-4.1.3.jar"/>
 	<classpathentry kind="lib" path="lib/log4j-1.2.17.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/org.dieschnittstelle.jee.esa.shared.entities.crm"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
