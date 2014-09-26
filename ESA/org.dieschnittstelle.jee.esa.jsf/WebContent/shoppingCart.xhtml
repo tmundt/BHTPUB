@@ -39,7 +39,7 @@
 			</h:outputText>
 		</h:column>
 	</h:dataTable>
-	
+
 	<!--  display error messages that are related to the 'cartTable' - this name can be chosen arbitrarily by the application -->
 	<h:message for="cartTable" errorStyle="color:red; display:block" />
 
@@ -76,9 +76,10 @@
 				<td>Email:</td>
 				<td><h:inputText id="email" label="Email"
 						value="#{shoppingSessionVC.customer.email}" size="30">
-						<f:validateRequired/>
-						<f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/> 
-					 </h:inputText></td>
+						<f:validateRequired />
+						<f:validateRegex
+							pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+					</h:inputText></td>
 			</tr>
 			<!--  a checkbox that indicates whether we have a new or a returning customer -->
 			<tr>
@@ -109,8 +110,8 @@
 			</tr>
 		</table>
 		<!--  an example for using different button texts based on context information -->
-		<h:commandButton 
-			type="submit" id="registerCustomer" value="#{shoppingSessionVC.newCustomer ? 'Registrieren' : 'Anmelden'}"
+		<h:commandButton type="submit" id="registerCustomer"
+			value="#{shoppingSessionVC.newCustomer ? 'Registrieren' : 'Anmelden'}"
 			action="#{shoppingSessionVC.registerCustomer}" />
 	</h:form>
 
