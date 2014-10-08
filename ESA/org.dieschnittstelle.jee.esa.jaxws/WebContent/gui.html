@@ -80,7 +80,7 @@ function callWebapp(method, requestpath, obj, onsuccess, onerror) {
 	// create the request
 	var xmlhttp = new XMLHttpRequest();
 
-	var url = "http://localhost:8080/org.dieschnittstelle.jee.esa.jaxws/resteasy" + requestpath;
+	var url = "resteasy" + requestpath;
 
 	// access the url
 	xmlhttp.open(method, url, true);
