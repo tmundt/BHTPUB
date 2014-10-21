@@ -12,9 +12,13 @@ public class TouchpointServletContextListener implements ServletContextListener 
 	protected static Logger logger = Logger
 			.getLogger(TouchpointServletContextListener.class);
 
+	public TouchpointServletContextListener() {
+		System.err.println("TouchpointServletContextListener: constructor invoked\n");
+	}
+
 	@Override
 	public void contextDestroyed(ServletContextEvent evt) {
-		logger.info("contextDestroyed()");
+		System.err.println("TouchpointServletContextListener: contextDestroyed() invoked\n");
 
 		// we read out the TouchpointCRUDExecutor and let it store its content
 		TouchpointCRUDExecutor exec = (TouchpointCRUDExecutor) evt
@@ -31,9 +35,8 @@ public class TouchpointServletContextListener implements ServletContextListener 
 
 	@Override
 	public void contextInitialized(ServletContextEvent evt) {
-
-		logger.info("contextInitialised()");
-
+		System.err.println("TouchpointServletContextListener: contextInitialised() invoked\n");
+		
 		// we create a new executor for a file to be stored in the context root
 		String rootPath = evt.getServletContext().getRealPath("/");
 		TouchpointCRUDExecutor exec = new TouchpointCRUDExecutor(new File(

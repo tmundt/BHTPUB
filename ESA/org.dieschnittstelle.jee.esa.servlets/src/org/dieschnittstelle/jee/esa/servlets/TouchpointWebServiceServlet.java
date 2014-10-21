@@ -15,6 +15,10 @@ public class TouchpointWebServiceServlet extends HttpServlet {
 	protected static Logger logger = Logger
 			.getLogger(TouchpointWebServiceServlet.class);
 
+	public TouchpointWebServiceServlet() {
+		System.err.println("TouchpointWebServiceServlet: constructor invoked\n");
+	}
+	
 	@Override
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) {

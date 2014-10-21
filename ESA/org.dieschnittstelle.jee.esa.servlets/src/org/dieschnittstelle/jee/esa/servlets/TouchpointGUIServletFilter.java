@@ -24,6 +24,11 @@ public class TouchpointGUIServletFilter implements Filter {
 	protected static Logger logger = Logger
 			.getLogger(TouchpointGUIServletFilter.class);
 
+	public TouchpointGUIServletFilter() {
+		System.err.println("TouchpointGUIServletFilter: constructor invoked\n");
+	}
+
+	
 	@Override
 	public void destroy() {
 		// TODO Auto-generated method stub
@@ -33,7 +38,8 @@ public class TouchpointGUIServletFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
-
+		System.err.println("TouchpointGUIServletFilter: doFilter() invoked\n");
+		
 		// check whether we have a an accept-language header that will be set by the browser but not by the apache http client.
 		// otherwise reject the request
 		String acceptLanguageHeader = ((HttpServletRequest) request)
