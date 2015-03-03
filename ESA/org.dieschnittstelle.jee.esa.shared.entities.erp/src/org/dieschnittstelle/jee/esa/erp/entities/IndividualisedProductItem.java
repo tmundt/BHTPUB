@@ -54,10 +54,7 @@ public class IndividualisedProductItem extends AbstractProduct implements Serial
 	}
 	
 	public int hashCode() {
-		int code = HashCodeBuilder.reflectionHashCode(this);
-		System.out.println("hashCode of " + this + ": " + hashCode());
-		
-		return code;
+		return HashCodeBuilder.reflectionHashCode(this);
 	}
 
 }
