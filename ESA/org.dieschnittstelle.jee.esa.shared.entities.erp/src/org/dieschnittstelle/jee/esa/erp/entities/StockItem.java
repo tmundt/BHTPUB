@@ -28,7 +28,7 @@ public class StockItem {
 
 	@Id
 	@ManyToOne(cascade = CascadeType.MERGE)
-	private AbstractProduct product;
+	private IndividualisedProductItem product;
 
 	private int price;
 	
@@ -38,7 +38,7 @@ public class StockItem {
 
 	}
 
-	public StockItem(AbstractProduct product,
+	public StockItem(IndividualisedProductItem product,
 			PointOfSale pos, int units) {
 		this.product = product;
 		this.pos = pos;
@@ -53,11 +53,11 @@ public class StockItem {
 		this.pos = pos;
 	}
 
-	public AbstractProduct getProduct() {
+	public IndividualisedProductItem getProduct() {
 		return product;
 	}
 
-	public void setProduct(AbstractProduct product) {
+	public void setProduct(IndividualisedProductItem product) {
 		this.product = product;
 	}
 

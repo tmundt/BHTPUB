@@ -10,24 +10,24 @@ public class ProductAtPosPK implements Serializable {
 	 */
 	private static final long serialVersionUID = 9113210426279286629L;
 
-	private AbstractProduct product;
+	private IndividualisedProductItem product;
 
 	private PointOfSale pos;
 
 	public ProductAtPosPK() {
 	}
 
-	public ProductAtPosPK(AbstractProduct product,
+	public ProductAtPosPK(IndividualisedProductItem product,
 			PointOfSale pos) {
 		this.product = product;
 		this.pos = pos;
 	}
 
-	public AbstractProduct getProduct() {
+	public IndividualisedProductItem getProduct() {
 		return product;
 	}
 
-	public void setProduct(AbstractProduct product) {
+	public void setProduct(IndividualisedProductItem product) {
 		this.product = product;
 	}
 
