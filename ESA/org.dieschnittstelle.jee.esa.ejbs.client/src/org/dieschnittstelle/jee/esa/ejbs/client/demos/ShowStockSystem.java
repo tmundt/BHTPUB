@@ -6,7 +6,7 @@ import static org.dieschnittstelle.jee.esa.ejbs.client.Constants.TOUCHPOINT_1;
 import static org.dieschnittstelle.jee.esa.ejbs.client.Constants.TOUCHPOINT_2;
 
 import org.apache.log4j.Logger;
-import org.dieschnittstelle.jee.esa.ejbs.client.Util;
+import org.dieschnittstelle.jee.esa.shared.lib.Util;
 import org.dieschnittstelle.jee.esa.ejbs.client.ejbclients.ProductCRUDClient;
 import org.dieschnittstelle.jee.esa.ejbs.client.ejbclients.StockSystemClient;
 import org.dieschnittstelle.jee.esa.ejbs.client.ejbclients.TouchpointAndPointOfSaleCRUDClient;

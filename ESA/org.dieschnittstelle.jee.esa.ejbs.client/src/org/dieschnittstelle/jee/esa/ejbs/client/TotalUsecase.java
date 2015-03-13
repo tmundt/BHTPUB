@@ -14,6 +14,10 @@ import org.dieschnittstelle.jee.esa.ejbs.client.ejbclients.CustomerTransactionCR
 import org.dieschnittstelle.jee.esa.ejbs.client.ejbclients.ProductCRUDClient;
 import org.dieschnittstelle.jee.esa.ejbs.client.ejbclients.StockSystemClient;
 import org.dieschnittstelle.jee.esa.ejbs.client.ejbclients.TouchpointAndPointOfSaleCRUDClient;
+import org.dieschnittstelle.jee.esa.ejbs.client.shopping.ShoppingBusinessDelegate;
+import org.dieschnittstelle.jee.esa.ejbs.client.shopping.ShoppingSession;
+import org.dieschnittstelle.jee.esa.ejbs.client.shopping.ShoppingSessionFacadeClient;
+import org.dieschnittstelle.jee.esa.shared.lib.Util;
 
 public class TotalUsecase {
 
@@ -130,11 +134,10 @@ public class TotalUsecase {
 				try {
 					// create a shopping session and initialise it such that
 					// it can access the required beans
-					ShoppingSession session = new ShoppingSession(); /*
-																	 * new
-																	 * ShoppingSessionFacadeClient
-																	 * ();
-																	 */
+					ShoppingBusinessDelegate session = new ShoppingSession();
+					// for PAT1, use the ShoppingSessionFacadeClient as implementation of session
+					// ShoppingBusinessDelegate session = new ShoppingSessionFacadeClient();
+					
 					session.initialise();
 
 					// add a customer and a touchpoint

@@ -1,4 +1,4 @@
-package org.dieschnittstelle.jee.esa.ejbs.client;
+package org.dieschnittstelle.jee.esa.ejbs.client.shopping;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ import org.dieschnittstelle.jee.esa.ejbs.client.ejbclients.ShoppingCartClient;
 import org.dieschnittstelle.jee.esa.erp.entities.AbstractProduct;
 import org.dieschnittstelle.jee.esa.erp.entities.Campaign;
 
-public class ShoppingSession {
+public class ShoppingSession implements ShoppingBusinessDelegate {
 
 	protected static Logger logger = Logger.getLogger(ShoppingSession.class);
 

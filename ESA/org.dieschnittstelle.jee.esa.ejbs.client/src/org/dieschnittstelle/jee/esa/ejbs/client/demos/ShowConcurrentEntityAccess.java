@@ -7,7 +7,7 @@ import org.apache.log4j.Logger;
 import org.dieschnittstelle.jee.esa.crm.ejbs.crud.CustomerCRUDRemote;
 import org.dieschnittstelle.jee.esa.crm.entities.Customer;
 import org.dieschnittstelle.jee.esa.ejbs.client.Constants;
-import org.dieschnittstelle.jee.esa.ejbs.client.Util;
+import org.dieschnittstelle.jee.esa.shared.lib.Util;
 import org.dieschnittstelle.jee.esa.ejbs.client.ejbclients.CustomerCRUDClient;
 
 public class ShowConcurrentEntityAccess {
