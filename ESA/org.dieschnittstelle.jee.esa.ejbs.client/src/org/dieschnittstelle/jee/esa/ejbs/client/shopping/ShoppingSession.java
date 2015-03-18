@@ -127,7 +127,7 @@ public class ShoppingSession implements ShoppingBusinessDelegate {
 	}
 
 	/*
-	 * to be implemented for PAT2
+	 * to be implemented as server-side method for PAT2
 	 */
 	private void checkAndRemoveProductsFromStock() {
 		logger.info("checkAndRemoveProductsFromStock");
