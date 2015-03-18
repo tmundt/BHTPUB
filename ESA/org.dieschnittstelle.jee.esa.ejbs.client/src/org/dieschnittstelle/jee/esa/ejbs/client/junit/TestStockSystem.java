@@ -10,7 +10,7 @@ import org.dieschnittstelle.jee.esa.crm.entities.StationaryTouchpoint;
 import org.dieschnittstelle.jee.esa.ejbs.client.Constants;
 import org.dieschnittstelle.jee.esa.ejbs.client.ejbclients.ProductCRUDClient;
 import org.dieschnittstelle.jee.esa.ejbs.client.ejbclients.StockSystemClient;
-import org.dieschnittstelle.jee.esa.ejbs.client.ejbclients.TouchpointAndPointOfSaleCRUDClient;
+import org.dieschnittstelle.jee.esa.ejbs.client.ejbclients.TouchpointAccessClient;
 import org.dieschnittstelle.jee.esa.erp.entities.IndividualisedProductItem;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -23,7 +23,7 @@ public class TestStockSystem {
 	
 	private ProductCRUDClient productCRUDClient;
 	private StockSystemClient stockSystemClient;
-	private TouchpointAndPointOfSaleCRUDClient touchpointCRUDClient;
+	private TouchpointAccessClient touchpointCRUDClient;
 	
 	@Before
 	public void prepareContext() throws Exception {
@@ -32,7 +32,7 @@ public class TestStockSystem {
 		// initialise the clients
 		productCRUDClient = new ProductCRUDClient();		
 		stockSystemClient = new StockSystemClient();		
-		touchpointCRUDClient = new TouchpointAndPointOfSaleCRUDClient();
+		touchpointCRUDClient = new TouchpointAccessClient();
 		// we create the touchpoints and products before creating the stock items as the actual subject of testing
 		productCRUDClient.createProduct(PRODUCT_1);
 		productCRUDClient.createProduct(PRODUCT_2);

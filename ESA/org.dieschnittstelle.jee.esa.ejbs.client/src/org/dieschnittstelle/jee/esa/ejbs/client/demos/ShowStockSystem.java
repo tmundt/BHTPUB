@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
 import org.dieschnittstelle.jee.esa.shared.lib.Util;
 import org.dieschnittstelle.jee.esa.ejbs.client.ejbclients.ProductCRUDClient;
 import org.dieschnittstelle.jee.esa.ejbs.client.ejbclients.StockSystemClient;
-import org.dieschnittstelle.jee.esa.ejbs.client.ejbclients.TouchpointAndPointOfSaleCRUDClient;
+import org.dieschnittstelle.jee.esa.ejbs.client.ejbclients.TouchpointAccessClient;
 
 public class ShowStockSystem {
 
@@ -26,7 +26,7 @@ public class ShowStockSystem {
 	// declare the attributes that will be instantiated with the ejb clients
 	private ProductCRUDClient productCRUD;
 	private StockSystemClient stockSystemClient;
-	private TouchpointAndPointOfSaleCRUDClient touchpointCRUD;
+	private TouchpointAccessClient touchpointCRUD;
 	
 	public ShowStockSystem() throws Exception {
 		instantiateClients();
@@ -55,7 +55,7 @@ public class ShowStockSystem {
 		// instantiate the clients
 		productCRUD = new ProductCRUDClient();
 		stockSystemClient = new StockSystemClient();
-		touchpointCRUD = new TouchpointAndPointOfSaleCRUDClient();
+		touchpointCRUD = new TouchpointAccessClient();
 		
 		System.out.println("\n***************** instantiated clients\n");
 	}

@@ -13,7 +13,7 @@ import org.dieschnittstelle.jee.esa.ejbs.client.ejbclients.CustomerCRUDClient;
 import org.dieschnittstelle.jee.esa.ejbs.client.ejbclients.CustomerTransactionCRUDClient;
 import org.dieschnittstelle.jee.esa.ejbs.client.ejbclients.ProductCRUDClient;
 import org.dieschnittstelle.jee.esa.ejbs.client.ejbclients.StockSystemClient;
-import org.dieschnittstelle.jee.esa.ejbs.client.ejbclients.TouchpointAndPointOfSaleCRUDClient;
+import org.dieschnittstelle.jee.esa.ejbs.client.ejbclients.TouchpointAccessClient;
 import org.dieschnittstelle.jee.esa.ejbs.client.shopping.ShoppingBusinessDelegate;
 import org.dieschnittstelle.jee.esa.ejbs.client.shopping.ShoppingSession;
 import org.dieschnittstelle.jee.esa.ejbs.client.shopping.ShoppingSessionFacadeClient;
@@ -36,7 +36,7 @@ public class TotalUsecase {
 
 	// declare the attributes that will be instantiated with the ejb clients
 	private ProductCRUDClient productCRUD;
-	private TouchpointAndPointOfSaleCRUDClient touchpointCRUD;
+	private TouchpointAccessClient touchpointAccess;
 	private StockSystemClient stockSystem;
 	private CustomerCRUDClient customerCRUD;
 	private CampaignTrackingClient campaignTracking;
@@ -66,7 +66,7 @@ public class TotalUsecase {
 	public void instantiateClients() throws Exception {
 		// instantiate the clients
 		productCRUD = new ProductCRUDClient();
-		touchpointCRUD = new TouchpointAndPointOfSaleCRUDClient();
+		touchpointAccess = new TouchpointAccessClient();
 		stockSystem = new StockSystemClient();
 		customerCRUD = new CustomerCRUDClient();
 		campaignTracking = new CampaignTrackingClient();
@@ -87,8 +87,8 @@ public class TotalUsecase {
 
 	public void createTouchpoints() {
 		// create touchpoints
-		touchpointCRUD.createTouchpoint(TOUCHPOINT_1);
-		touchpointCRUD.createTouchpoint(TOUCHPOINT_2);
+		touchpointAccess.createTouchpoint(TOUCHPOINT_1);
+		touchpointAccess.createTouchpoint(TOUCHPOINT_2);
 
 		System.out.println("\n***************** created touchpoints\n");
 	}
