@@ -37,7 +37,7 @@ public class TotalUsecase {
 	// declare the attributes that will be instantiated with the ejb clients
 	private ProductCRUDClient productCRUD;
 	private TouchpointAndPointOfSaleCRUDClient touchpointCRUD;
-	private StockSystemClient stockSystemCRUD;
+	private StockSystemClient stockSystem;
 	private CustomerCRUDClient customerCRUD;
 	private CampaignTrackingClient campaignTracking;
 	private CustomerTransactionCRUDClient transactionCRUD;
@@ -67,7 +67,7 @@ public class TotalUsecase {
 		// instantiate the clients
 		productCRUD = new ProductCRUDClient();
 		touchpointCRUD = new TouchpointAndPointOfSaleCRUDClient();
-		stockSystemCRUD = new StockSystemClient();
+		stockSystem = new StockSystemClient();
 		customerCRUD = new CustomerCRUDClient();
 		campaignTracking = new CampaignTrackingClient();
 		transactionCRUD = new CustomerTransactionCRUDClient();
@@ -95,13 +95,13 @@ public class TotalUsecase {
 
 	public void createStock() {
 		// create stock
-		stockSystemCRUD.addToStock(PRODUCT_1,
+		stockSystem.addToStock(PRODUCT_1,
 				TOUCHPOINT_1.getErpPointOfSaleId(), 100);
-		stockSystemCRUD.addToStock(PRODUCT_1,
+		stockSystem.addToStock(PRODUCT_1,
 				TOUCHPOINT_2.getErpPointOfSaleId(), 100);
-		stockSystemCRUD.addToStock(PRODUCT_2,
+		stockSystem.addToStock(PRODUCT_2,
 				TOUCHPOINT_1.getErpPointOfSaleId(), 100);
-		stockSystemCRUD.addToStock(PRODUCT_2,
+		stockSystem.addToStock(PRODUCT_2,
 				TOUCHPOINT_2.getErpPointOfSaleId(), 100);
 
 		System.out.println("\n***************** created stock\n");
