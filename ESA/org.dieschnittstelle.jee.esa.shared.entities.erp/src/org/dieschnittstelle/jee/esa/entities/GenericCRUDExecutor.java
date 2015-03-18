@@ -82,6 +82,7 @@ public class GenericCRUDExecutor<T extends GenericCRUDEntity> {
 	 * update an existing object
 	 */
 	public T updateObject(final T obj) {
+		System.out.println("updateObject(): " + obj);
 
 		// we try to read the object given the id of the object that is being
 		// updated
@@ -172,6 +173,8 @@ public class GenericCRUDExecutor<T extends GenericCRUDEntity> {
 	 * read an object given its id
 	 */
 	public T readObject(int i) {
+		System.out.println("readObject(): " + i);
+		
 		for (T obj : this.objects) {
 			if (obj.getId() == i) {
 				return obj;
