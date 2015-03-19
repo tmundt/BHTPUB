@@ -22,14 +22,15 @@ public class ProductCRUDClient implements ProductCRUDRemote {
 
 	public AbstractProduct createProduct(AbstractProduct prod) {
 
-		// JPA3: KOMMENTIEREN SIE DIE FOLGENDE ZUWEISUNG VON IDs AUS
+		// JPA3: KOMMENTIEREN SIE DIE FOLGENDE ZUWEISUNG VON IDs UND DIE RETURN-ANWEISUNG AUS
 		prod.setId(Constants.nextId());
-		
+		return prod;
+
+		// JPA3: KOMMENTIEREN SIE DEN FOLGENDEN CODE EIN		
 //		AbstractProduct created = proxy.createProduct(prod);
 //		// as a side-effect we set the id of the created product on the argument before returning
 //		prod.setId(created.getId());
 //		return created;
-		return prod;
 	}
 
 	public List<AbstractProduct> readAllProducts() {

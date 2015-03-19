@@ -104,10 +104,11 @@ public class ShoppingSession implements ShoppingBusinessDelegate {
 		// verify the campaigns
 		verifyCampaigns();
 
-		// read out the products from the cart
-		List<CrmProductBundle> products = this.shoppingCart.getProductBundles();
-
+		// remove the products from stock
+		checkAndRemoveProductsFromStock();
+		
 		// iterate over the products and purchase the campaigns
+		List<CrmProductBundle> products = this.shoppingCart.getProductBundles();
 		for (CrmProductBundle productBundle : this.shoppingCart.getProductBundles()) {
 			if (productBundle.isCampaign()) {
 				this.campaignTracking.purchaseCampaignAtTouchpoint(productBundle.getErpProductId(), this.touchpoint,
@@ -115,9 +116,6 @@ public class ShoppingSession implements ShoppingBusinessDelegate {
 			}
 		}
 		
-		// remove the products from stock
-		checkAndRemoveProductsFromStock();
-
 		// then we add a new customer transaction for the current purchase
 		CustomerTransaction transaction = new CustomerTransaction(this.customer, this.touchpoint, products);
 		transaction.setCompleted(true);
