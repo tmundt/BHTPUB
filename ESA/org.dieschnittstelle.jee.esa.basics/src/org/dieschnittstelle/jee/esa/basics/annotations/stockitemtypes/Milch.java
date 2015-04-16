@@ -1,5 +1,6 @@
 package org.dieschnittstelle.jee.esa.basics.annotations.stockitemtypes;
 
+import org.dieschnittstelle.jee.esa.basics.DisplayAs;
 import org.dieschnittstelle.jee.esa.basics.annotations.Initialise;
 import org.dieschnittstelle.jee.esa.basics.annotations.Brandname;
 import org.dieschnittstelle.jee.esa.basics.annotations.StockItem;
@@ -13,8 +14,9 @@ public class Milch {
 	private int menge;
 
 	@Brandname
+	@DisplayAs(value ="marke")
 	private String markenname;
-
+	
 	public int getMenge() {
 		return menge;
 	}
