@@ -36,7 +36,7 @@ public class ShowAnnotations {
 	}
 
 	/*
-	 * UE BAS2 
+	 * UE BAS2 und BAS3
 	 */
 	private static void showAttributes(Object consumable) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException, NoSuchMethodException, SecurityException {
 		Class<? extends Object> k = consumable.getClass();
@@ -56,6 +56,7 @@ public class ShowAnnotations {
 			fieldname = "get" + fieldname.substring(0,1).toUpperCase() + fieldname.substring(1);
 			Method m = k.getDeclaredMethod(fieldname);
 			attribute.append(": ");
+			// read data out of field
 			attribute.append(m.invoke(consumable));
 			attribute.append(", ");
 		}
