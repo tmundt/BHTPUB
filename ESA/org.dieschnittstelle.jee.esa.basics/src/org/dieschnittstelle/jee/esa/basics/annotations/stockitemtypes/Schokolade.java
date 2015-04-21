@@ -11,7 +11,7 @@ import org.dieschnittstelle.jee.esa.basics.annotations.Units;
 public class Schokolade {
 
 	@Units
-	@DisplayAs(value ="menge")
+	@DisplayAs("menge")
 	private int anzahlStuecke;
 
 	private String marke;
