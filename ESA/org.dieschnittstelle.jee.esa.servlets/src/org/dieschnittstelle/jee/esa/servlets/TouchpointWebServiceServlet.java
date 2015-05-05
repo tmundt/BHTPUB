@@ -54,6 +54,7 @@ public class TouchpointWebServiceServlet extends HttpServlet {
 	@Override	
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) {
+		logger.info("doPost()");
 
 		// assume POST will only be used for touchpoint creation, i.e. there is
 		// no need to check the uri that has been used
@@ -86,5 +87,36 @@ public class TouchpointWebServiceServlet extends HttpServlet {
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
+	}
+	
+	@Override
+	protected void doDelete(HttpServletRequest request,
+			HttpServletResponse response) {
+		logger.info("doDelete()");
+		// obtain the executor for deleting the touchpoint from the servlet context using the touchpointCRUD attribute
+		TouchpointCRUDExecutor exec = (TouchpointCRUDExecutor) getServletContext()
+				.getAttribute("touchpointCRUD");
+		
+		try {
+			
+			int touchpointID = Integer.valueOf(request.getRequestURL().toString().split("/")[7]);
+			
+			System.out.println("WebService delete, id: " + touchpointID);
+			
+			// call the delete method on the executor and take its return value/boolean
+			// to see if the deletion was successfull
+			Boolean tpDeleted =  exec.deleteTouchpoint(touchpointID);
+			
+			// show client the successful deletion
+			if(tpDeleted == true) {
+				response.setStatus(HttpServletResponse.SC_OK);
+			} else {
+				// show client that the requested item to be deleted was not found
+				response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
 	}
 }

@@ -10,6 +10,7 @@ import java.util.List;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.ByteArrayEntity;
@@ -145,9 +146,26 @@ public class ShowTouchpointService {
 	 * 
 	 * @param tp
 	 */
-	public static void deleteTouchpoint(AbstractTouchpoint tp) {
-		logger.info("deleteTouchpoint(): " + tp);
-
+	public void deleteTouchpoint(AbstractTouchpoint tp) {
+		logger.info("deleteTouchpoint() ID: " + tp.getId());
+			
+		try {
+			// create delete request for the api/touchpoints uri
+			HttpDelete request = new HttpDelete("http://localhost:8888/org.dieschnittstelle.jee.esa.servlets/api/touchpoints/delete/" +tp.getId());
+			
+			// execute the request, which will return a HttpResponse object
+			HttpResponse response = client.execute(request);
+			
+			// log the status line
+			logger.info("Delete, Response status: " + response.getStatusLine());
+			
+			// cleanup the request
+			EntityUtils.consume(response.getEntity());
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -156,7 +174,7 @@ public class ShowTouchpointService {
 	 * fuer das Schreiben des zu erzeugenden Objekts als Request Body siehe die
 	 * Hinweise auf:
 	 * http://stackoverflow.com/questions/10146692/how-do-i-write-to
-	 * -an-outpustream-using-defaulthttpclient
+	 * -an-outputstream-using-defaulthttpclient
 	 * 
 	 * @param tp
 	 */
