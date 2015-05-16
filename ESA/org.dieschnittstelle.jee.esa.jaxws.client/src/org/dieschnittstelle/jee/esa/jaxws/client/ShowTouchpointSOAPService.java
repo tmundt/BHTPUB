@@ -88,6 +88,8 @@ public class ShowTouchpointSOAPService {
 			/*
 			 * UE JWS3: add a call to the update method of the web service, passing tp
 			 */
+			serviceOperations.updateTouchPoint(tp);
+			
 			
 			System.err.println("TestTouchpointSOAPService: done.\n");
 		} catch (Exception e) {

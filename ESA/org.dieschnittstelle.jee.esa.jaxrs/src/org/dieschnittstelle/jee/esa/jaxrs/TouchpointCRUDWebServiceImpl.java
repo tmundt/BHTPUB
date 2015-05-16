@@ -49,8 +49,18 @@ public class TouchpointCRUDWebServiceImpl implements ITouchpointCRUDWebService {
 		return this.touchpointCRUD.deleteObject(id);	
 	}
 
+	@Override
+	public StationaryTouchpoint readTouchpoint(int id) {
+		return (StationaryTouchpoint)this.touchpointCRUD.readObject(id);
+	}
+
 	/*
 	 * UE JRS1: implement the method for updating touchpoints
 	 */
+	@Override
+	public StationaryTouchpoint updateTouchpoint(StationaryTouchpoint touchpoint) {
+		// TODO Auto-generated method stub
+		return (StationaryTouchpoint)this.touchpointCRUD.updateObject(touchpoint);
+	}
 
 }
