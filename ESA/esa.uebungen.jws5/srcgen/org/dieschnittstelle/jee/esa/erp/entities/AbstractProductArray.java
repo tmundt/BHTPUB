@@ -1,5 +1,5 @@
 
-package org.dieschnittstelle.jee.esa.crm.entities;
+package org.dieschnittstelle.jee.esa.erp.entities;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,16 +10,16 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java-Klasse für abstractTouchpointArray complex type.
+ * <p>Java-Klasse für abstractProductArray complex type.
  * 
  * <p>Das folgende Schemafragment gibt den erwarteten Content an, der in dieser Klasse enthalten ist.
  * 
  * <pre>
- * &lt;complexType name="abstractTouchpointArray">
+ * &lt;complexType name="abstractProductArray">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="item" type="{http://dieschnittstelle.org/jee/esa/crm/entities}abstractTouchpoint" maxOccurs="unbounded" minOccurs="0"/>
+ *         &lt;element name="item" type="{http://dieschnittstelle.org/jee/esa/erp/entities}abstractProduct" maxOccurs="unbounded" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -29,13 +29,13 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "abstractTouchpointArray", propOrder = {
+@XmlType(name = "abstractProductArray", propOrder = {
     "item"
 })
-public class AbstractTouchpointArray {
+public class AbstractProductArray {
 
     @XmlElement(nillable = true)
-    protected List<AbstractTouchpoint> item;
+    protected List<AbstractProduct> item;
 
     /**
      * Gets the value of the item property.
@@ -55,13 +55,13 @@ public class AbstractTouchpointArray {
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link AbstractTouchpoint }
+     * {@link AbstractProduct }
      * 
      * 
      */
-    public List<AbstractTouchpoint> getItem() {
+    public List<AbstractProduct> getItem() {
         if (item == null) {
-            item = new ArrayList<AbstractTouchpoint>();
+            item = new ArrayList<AbstractProduct>();
         }
         return this.item;
     }
