@@ -46,17 +46,19 @@ public class StockSystemSingleton implements StockSystemRemote {
 	public void removeFromStock(IndividualisedProductItem product,
 			int pointOfSaleId, int units) {
 		StockItem item = stockCRUD.readStockItem(product, posCRUD.readPointOfSale(pointOfSaleId));
-		int newStock = item.getUnits() - units;
+		int stockAmount = item.getUnits();
+		if (stockAmount <= 0 || (stockAmount - units) < 0) {
+			System.err.println("removeFromStock(), amount of stock would be below zero, stock: "+stockAmount);
+			return;
+		}
+		int newStock = stockAmount - units;
 		item.setUnits(newStock);
 		stockCRUD.updateStockItem(item);
-
 	}
 
 	@Override
 	public List<IndividualisedProductItem> getProductsOnStock(int pointOfSaleId) {
 		List <StockItem> stockList = stockCRUD.readStockItemForPointOfSale(posCRUD.readPointOfSale(pointOfSaleId));
-		//stockCRUD.readStockItemsForProduct(stockCRUD.readStockItemForPointOfSale(posCRUD.readPointOfSale(pointOfSaleId)));
-		//show("StockSystemSingleton, getProductsOnStock(): " + stockList);
 		List<IndividualisedProductItem> productList = new ArrayList<IndividualisedProductItem>();
 		for (StockItem item: stockList) {
 			productList.add(item.getProduct());
@@ -66,7 +68,7 @@ public class StockSystemSingleton implements StockSystemRemote {
 
 	@Override
 	public List<IndividualisedProductItem> getAllProductsOnStock() {
-		//stockCRUD.
+		//for exercise JSF
 		return null;
 	}
 
@@ -81,7 +83,6 @@ public class StockSystemSingleton implements StockSystemRemote {
 	public int getTotalUnitsOnStock(IndividualisedProductItem product) {
 		int totalUnits = 0;
 		List<StockItem> stockList = stockCRUD.readStockItemsForProduct(product);
-		//List<IndividualisedProductItem> productList = new ArrayList<IndividualisedProductItem>();
 		for (StockItem item: stockList) {
 			totalUnits += item.getUnits();
 		}
@@ -109,7 +110,6 @@ public class StockSystemSingleton implements StockSystemRemote {
 				}
 			}
 		}
-//		posIDList.add(1);
 		return posIDList;
 	}
 }
