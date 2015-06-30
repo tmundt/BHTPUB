@@ -5,19 +5,25 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.dieschnittstelle.jee.esa.crm.entities.AbstractTouchpoint;
+import org.dieschnittstelle.jee.esa.erp.ejbs.StockSystemLocal;
 import org.dieschnittstelle.jee.esa.erp.entities.IndividualisedProductItem;
 import org.dieschnittstelle.jee.esa.erp.entities.PointOfSale;
 import org.dieschnittstelle.jee.esa.erp.entities.StockItem;
 import org.jboss.logging.Logger;
 // declare a stocksystem local interface
 
+
 /* declare the class as named component using CDI annotations */  
 @Named("vc")
 /* TODO declare the class as application scoped using the CDI annotation */
+@ApplicationScoped
 public class StockSystemViewController {
 
 	protected static Logger logger = Logger
@@ -31,7 +37,8 @@ public class StockSystemViewController {
 	 * .shared.ejbmodule.erp/StockSystemSingleton!org.dieschnittstelle.jee
 	 * .esa.erp.ejbs.StockSystemLocal
 	 */
-
+	@Resource(mappedName="java:global/org.dieschnittstelle.jee.esa.ejbs/org.dieschnittstelle.jee.esa.shared.ejbmodule.erp/StockSystemSingleton!org.dieschnittstelle.jee.esa.erp.ejbs.StockSystemLocal")
+	private StockSystemLocal stockSystemEJB;
 	/*
 	 * use the helper bean - this is needed for JSF6
 	 */
@@ -59,8 +66,9 @@ public class StockSystemViewController {
 	/*
 	 * TODO: return the values of the stockItemsMap. Note that you might need to create a new Collection, e.g. ArrayList to add the values
 	 */
-	public Collection<StockItemWrapper> getStockItems() {
-		return null;
+	
+	public Collection<StockItem> getStockItems() {
+		return stockSystemEJB.getCompleteStock();
 	}
 
 	/*
@@ -116,6 +124,7 @@ public class StockSystemViewController {
 	 * 
 	 * TODO: should be called once this bean is created
 	 */
+	@PostConstruct
 	public void loadData() {
 
 		logger.info("@postConstruct: helper is: " + stockSystemHelper);

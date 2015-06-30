@@ -63,4 +63,9 @@ public class StockItemCRUDStateless implements StockItemCRUDLocal {
 		return stockList;
 	}
 
+	@Override
+	public List<StockItem> getAllStockItems() {
+		return em.createQuery("FROM StockItem").getResultList();
+	}
+
 }

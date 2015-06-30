@@ -18,7 +18,7 @@ import org.jboss.logging.Logger;
 import static org.dieschnittstelle.jee.esa.shared.lib.Util.*;
 
 @Singleton
-public class StockSystemSingleton implements StockSystemRemote {
+public class StockSystemSingleton implements StockSystemRemote, StockSystemLocal {
 	
 	protected static Logger logger = Logger
 			.getLogger(StockSystemSingleton.class);
@@ -55,6 +55,8 @@ public class StockSystemSingleton implements StockSystemRemote {
 		item.setUnits(newStock);
 		stockCRUD.updateStockItem(item);
 	}
+	
+	
 
 	@Override
 	public List<IndividualisedProductItem> getProductsOnStock(int pointOfSaleId) {
@@ -111,5 +113,10 @@ public class StockSystemSingleton implements StockSystemRemote {
 			}
 		}
 		return posIDList;
+	}
+
+	@Override
+	public List<StockItem> getCompleteStock() {
+		return stockCRUD.getAllStockItems();
 	}
 }

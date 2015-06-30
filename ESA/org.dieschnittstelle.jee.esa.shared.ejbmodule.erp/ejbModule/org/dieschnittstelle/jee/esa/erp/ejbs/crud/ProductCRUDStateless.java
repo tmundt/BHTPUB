@@ -21,7 +21,6 @@ public class ProductCRUDStateless implements ProductCRUDRemote {
 
 	@Override
 	public AbstractProduct createProduct(AbstractProduct prod) {
-		// TODO Auto-generated method stub
 		em.persist(prod);
 		System.out.println("ProductCRUDStateless(), createProduct, prod:" + prod);
 		return prod;
