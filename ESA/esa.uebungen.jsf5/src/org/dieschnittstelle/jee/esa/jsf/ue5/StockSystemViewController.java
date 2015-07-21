@@ -1,5 +1,6 @@
 package org.dieschnittstelle.jee.esa.jsf.ue5;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -8,6 +9,7 @@ import java.util.TreeMap;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.enterprise.context.ApplicationScoped;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -67,8 +69,8 @@ public class StockSystemViewController {
 	 * TODO: return the values of the stockItemsMap. Note that you might need to create a new Collection, e.g. ArrayList to add the values
 	 */
 	
-	public Collection<StockItem> getStockItems() {
-		return stockSystemEJB.getCompleteStock();
+	public Collection<StockItemWrapper> getStockItems() {
+		return new ArrayList(stockItemsMap.values());
 	}
 
 	/*
@@ -79,22 +81,28 @@ public class StockSystemViewController {
 		 * TODO: we accesss the parameters from the FacesContext.getCurrentInstance()
 		 * .getExternalContext().getRequestParameterMap()
 		 */
-
+		logger.info("updateUnits() called");
+		Map paramMap = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
 		/* TODO: read out the parameter(s) that we need */
+		String itemId = (String) paramMap.get("itemId");
 
 		/*
 		 * TODO: we read out the StockItemWrapper from the local map
 		 */
-
+		StockItemWrapper item = stockItemsMap.get(itemId);
+		System.out.println("Stockitem ist: " + item);
 		/*
 		 * TODO: we use the units diff on StockItemWrapper for determining the number
 		 * of units to add and call the add method on stockSystem
 		 */
+		stockSystemEJB.addToStock(item.getProduct(), item.getPos().getId(), item.getUnitsDiff());
+		
 
 		/*
 		 * TODO: once we are done we call the updateMethods on the item to set the new
 		 * value of units on the StockItem object itself
 		 */
+		item.updateUnits();
 
 		/* returning the empty string here results in keeping the current view */
 		return "";
@@ -103,6 +111,37 @@ public class StockSystemViewController {
 	/*
 	 * TODO: add a method for updating the price of a stock item
 	 */
+	public String updatePrice() {
+		/*
+		 * TODO: we accesss the parameters from the FacesContext.getCurrentInstance()
+		 * .getExternalContext().getRequestParameterMap()
+		 */
+		logger.info("updatePrice() called");
+		Map paramMap = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+		/* TODO: read out the parameter(s) that we need */
+		String itemId = (String) paramMap.get("itemId");
+
+		/*
+		 * TODO: we read out the StockItemWrapper from the local map
+		 */
+		StockItemWrapper item = stockItemsMap.get(itemId);
+		System.out.println("Stockitem ist: " + item);
+		/*
+		 * TODO: we use the units diff on StockItemWrapper for determining the number
+		 * of units to add and call the add method on stockSystem
+		 */
+		//stockSystemEJB.getAllProductsOnStock().
+		
+
+		/*
+		 * TODO: once we are done we call the updateMethods on the item to set the new
+		 * value of price on the StockItem object itself
+		 */
+		item.setPrice(item.getPrice());
+
+		/* returning the empty string here results in keeping the current view */
+		return "";
+	}
 	
 	/*
 	 * TODO: add a method that calls the doShopping() method on stockSystemHelper
@@ -130,16 +169,16 @@ public class StockSystemViewController {
 		logger.info("@postConstruct: helper is: " + stockSystemHelper);
 
 		// TODO: remove the comments (you might start with the first for statement and keep the second one commented until access to the touchpoints bean is done)
-//		this.stockItemsMap.clear();
+		this.stockItemsMap.clear();
 //
 //		/*
 //		 * read out the stock items and create the stock items and touchpoints
 //		 * map
 //		 */
-//		for (StockItem item : stockSystem.getCompleteStock()) {
-//			StockItemWrapper wrapper = new StockItemWrapper(item);
-//			this.stockItemsMap.put(wrapper.getId(), wrapper);
-//		}
+		for (StockItem item : stockSystemEJB.getCompleteStock()) {
+			StockItemWrapper wrapper = new StockItemWrapper(item);
+			this.stockItemsMap.put(wrapper.getId(), wrapper);
+		}
 //
 //		/* also read out the touchpoints */
 //		for (AbstractTouchpoint tp : touchpointBean.readAllTouchpoints()) {

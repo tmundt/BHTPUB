@@ -136,7 +136,7 @@ public class TotalUsecase {
 					// it can access the required beans
 					ShoppingBusinessDelegate session = new ShoppingSession();
 					// for PAT1, use the ShoppingSessionFacadeClient as implementation of session
-					// ShoppingBusinessDelegate session = new ShoppingSessionFacadeClient();
+					//ShoppingBusinessDelegate session = new ShoppingSessionFacadeClient();
 					
 					session.initialise();
 

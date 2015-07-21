@@ -2,9 +2,7 @@ package org.dieschnittstelle.jee.esa.crm.ejbs;
 
 import java.util.List;
 
-import javax.ejb.Local;
 import javax.ejb.Remote;
-//import javax.ejb.Remote;
 import javax.jws.WebService;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;

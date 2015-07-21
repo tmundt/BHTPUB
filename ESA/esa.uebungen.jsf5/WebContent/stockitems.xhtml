@@ -37,10 +37,10 @@
 			<h:form>
 				<h:inputText value="#{item.units}" size="3" name="units" />
 				<!--  the action that updates the units: invoke the updateUnits method on stockSystem  -->
-				<h:commandButton id="updateUnitsButton" action="#{lorem.ipsum}"
+				<h:commandButton id="updateUnitsButton" action="#{vc.updateUnits}"
 					value="aktualisieren">
 					<!-- pass an appropriate id or ids -->
-					<f:param name="" value="" />
+					<f:param name="itemId" value="#{item.id}" />
 				</h:commandButton>
 			</h:form>
 		</h:column>
@@ -48,8 +48,13 @@
 		<h:column>
 			<f:facet name="header">Preis</f:facet>
 			<h:form>
-				<h:inputText value="" size="3" name="price" />
+				<h:inputText value="#{item.price}" size="3" name="price" />
 				<!--  the action that updates the price through invoking the updatePrice method on stockSystem. This method needs to be declared and implemented in the EJB and then be called from the action implementation !  -->
+				<h:commandButton id="updatePriceButton" action="#{vc.updatePrice}"
+					value="aktualisieren">
+					<!-- pass an appropriate id or ids -->
+					<f:param name="itemId" value="#{item.id}" />
+				</h:commandButton>
 			</h:form>
 		</h:column>
 	</h:dataTable>
