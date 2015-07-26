@@ -23,4 +23,6 @@ public interface StockItemCRUDLocal {
 	
 	public List<StockItem> getAllStockItems();
 	
+	public void setPriceForStockItem(AbstractProduct prod, PointOfSale pos, int price);
+	
 }

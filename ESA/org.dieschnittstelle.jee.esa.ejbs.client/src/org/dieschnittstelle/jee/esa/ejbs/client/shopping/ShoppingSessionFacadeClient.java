@@ -10,6 +10,7 @@ import org.dieschnittstelle.jee.esa.crm.entities.AbstractTouchpoint;
 import org.dieschnittstelle.jee.esa.crm.entities.Customer;
 import org.dieschnittstelle.jee.esa.ejbs.client.Constants;
 import org.dieschnittstelle.jee.esa.erp.entities.AbstractProduct;
+import org.dieschnittstelle.jee.esa.shopping.ShoppingSessionFacadeRemote;
 
 public class ShoppingSessionFacadeClient implements ShoppingBusinessDelegate {
 
@@ -19,7 +20,7 @@ public class ShoppingSessionFacadeClient implements ShoppingBusinessDelegate {
 	/*
 	 * use the ShoppingSessionFacadeRemote interface
 	 */
-	private ShoppingBusinessDelegate proxy;
+	private ShoppingSessionFacadeRemote proxy;
 
 	@Override
 	public void initialise() throws Exception {
@@ -27,7 +28,7 @@ public class ShoppingSessionFacadeClient implements ShoppingBusinessDelegate {
 		Context context = new InitialContext();
 		
 		/* lookup the bean */
-		proxy = (ShoppingBusinessDelegate) context.lookup(Constants.SHOPPING_SESSION_BEAN);
+		proxy = (ShoppingSessionFacadeRemote) context.lookup(Constants.SHOPPING_SESSION_BEAN);
 	}
 
 	@Override

@@ -134,9 +134,9 @@ public class TotalUsecase {
 				try {
 					// create a shopping session and initialise it such that
 					// it can access the required beans
-					ShoppingBusinessDelegate session = new ShoppingSession();
+					//ShoppingBusinessDelegate session = new ShoppingSession();
 					// for PAT1, use the ShoppingSessionFacadeClient as implementation of session
-					//ShoppingBusinessDelegate session = new ShoppingSessionFacadeClient();
+					ShoppingBusinessDelegate session = new ShoppingSessionFacadeClient();
 					
 					session.initialise();
 
@@ -166,6 +166,10 @@ public class TotalUsecase {
 		} catch (Exception e) {
 			logger.error("got exception during shopping: " + e, e);
 		}
+		
+		System.out.println("\n***************** doShopping done\n");
+		if (this.stepping) Util.step();
+		
 	}
 
 	public void showTransactions() {

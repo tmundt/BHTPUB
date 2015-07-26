@@ -8,6 +8,7 @@ import javax.ejb.Stateful;
 import org.dieschnittstelle.jee.esa.crm.ejbs.CampaignTrackingLocal;
 import org.dieschnittstelle.jee.esa.crm.ejbs.CustomerTrackingLocal;
 import org.dieschnittstelle.jee.esa.crm.ejbs.ShoppingCartLocal;
+import org.dieschnittstelle.jee.esa.crm.ejbs.ShoppingException;
 import org.dieschnittstelle.jee.esa.crm.entities.AbstractTouchpoint;
 import org.dieschnittstelle.jee.esa.crm.entities.CrmProductBundle;
 import org.dieschnittstelle.jee.esa.crm.entities.Customer;
@@ -16,17 +17,18 @@ import org.dieschnittstelle.jee.esa.erp.entities.AbstractProduct;
 import org.dieschnittstelle.jee.esa.erp.entities.Campaign;
 
 @Stateful
-public class ShoppingSessionFacadeStateful implements ShoppingSessionFacadeRemote {
-	
-	//protected static Logger logger = Logger.getLogger(ShoppingSession.class);
-	
+public class ShoppingSessionFacadeStateful implements
+		ShoppingSessionFacadeRemote {
+
+	// protected static Logger logger = Logger.getLogger(ShoppingSession.class);
+
 	/*
 	 * the three beans that are used
 	 */
-	
+
 	@EJB
 	private ShoppingCartLocal shoppingCart;
-	
+
 	@EJB
 	private CustomerTrackingLocal customerTracking;
 
@@ -43,7 +45,6 @@ public class ShoppingSessionFacadeStateful implements ShoppingSessionFacadeRemot
 	 */
 	private AbstractTouchpoint touchpoint;
 
-
 	@Override
 	public void setTouchpoint(AbstractTouchpoint touchpoint) {
 		this.touchpoint = touchpoint;
@@ -57,7 +58,8 @@ public class ShoppingSessionFacadeStateful implements ShoppingSessionFacadeRemot
 
 	@Override
 	public void addProduct(AbstractProduct product, int units) {
-		this.shoppingCart.addProductBundle(new CrmProductBundle(product.getId(), units, product instanceof Campaign));
+		this.shoppingCart.addProductBundle(new CrmProductBundle(
+				product.getId(), units, product instanceof Campaign));
 	}
 
 	/*
@@ -65,23 +67,42 @@ public class ShoppingSessionFacadeStateful implements ShoppingSessionFacadeRemot
 	 */
 	public void verifyCampaigns() {
 		if (this.customer == null || this.touchpoint == null) {
-			throw new RuntimeException("cannot verify campaigns! No touchpoint has been set!");
+			throw new RuntimeException(
+					"cannot verify campaigns! No touchpoint has been set!");
 		}
-
-		for (CrmProductBundle productBundle : this.shoppingCart.getProductBundles()) {
-			if (productBundle.isCampaign()) {
-				int availableCampaigns = this.campaignTracking.existsValidCampaignExecutionAtTouchpoint(
-						productBundle.getErpProductId(), this.touchpoint);
-				System.out.println("got available campaigns for product " + productBundle.getErpProductId() + ": "
-						+ availableCampaigns);
-				// we check whether we have sufficient campaign items available
-				if (availableCampaigns < productBundle.getUnits()) {
-					throw new RuntimeException("verifyCampaigns() failed for productBundle " + productBundle
-							+ " at touchpoint " + this.touchpoint + "! Need " + productBundle.getUnits()
-							+ " instances of campaign, but only got: " + availableCampaigns);
+		try {
+			for (CrmProductBundle productBundle : this.shoppingCart
+					.getProductBundles()) {
+				if (productBundle.isCampaign()) {
+					int availableCampaigns = this.campaignTracking
+							.existsValidCampaignExecutionAtTouchpoint(
+									productBundle.getErpProductId(),
+									this.touchpoint);
+					System.out.println("got available campaigns for product "
+							+ productBundle.getErpProductId() + ": "
+							+ availableCampaigns);
+					// we check whether we have sufficient campaign items
+					// available
+					if (availableCampaigns < productBundle.getUnits()) {
+						throw new RuntimeException(
+								"verifyCampaigns() failed for productBundle "
+										+ productBundle
+										+ " at touchpoint "
+										+ this.touchpoint
+										+ "! Need "
+										+ productBundle.getUnits()
+										+ " instances of campaign, but only got: "
+										+ availableCampaigns);
+					}
 				}
 			}
+		} catch (Exception e) {
+			System.out.println("verifyCampagins() not possible, got: "
+					+ e.getMessage());
+			throw new ShoppingException(
+					ShoppingException.ShoppingSessionExceptionReason.CAMPAIGN_INVALID);
 		}
+
 	}
 
 	public void purchase() {
@@ -89,27 +110,30 @@ public class ShoppingSessionFacadeStateful implements ShoppingSessionFacadeRemot
 
 		if (this.customer == null || this.touchpoint == null) {
 			throw new RuntimeException(
-					"cannot commit shopping session! Either customer or touchpoint has not been set: " + this.customer
-							+ "/" + this.touchpoint);
+					"cannot commit shopping session! Either customer or touchpoint has not been set: "
+							+ this.customer + "/" + this.touchpoint);
 		}
 
 		// verify the campaigns
 		verifyCampaigns();
 
 		// remove the products from stock
-		//checkAndRemoveProductsFromStock();
-		
+		// checkAndRemoveProductsFromStock();
+
 		// iterate over the products and purchase the campaigns
 		List<CrmProductBundle> products = this.shoppingCart.getProductBundles();
-		for (CrmProductBundle productBundle : this.shoppingCart.getProductBundles()) {
+		for (CrmProductBundle productBundle : this.shoppingCart
+				.getProductBundles()) {
 			if (productBundle.isCampaign()) {
-				this.campaignTracking.purchaseCampaignAtTouchpoint(productBundle.getErpProductId(), this.touchpoint,
+				this.campaignTracking.purchaseCampaignAtTouchpoint(
+						productBundle.getErpProductId(), this.touchpoint,
 						productBundle.getUnits());
 			}
 		}
-		
+
 		// then we add a new customer transaction for the current purchase
-		CustomerTransaction transaction = new CustomerTransaction(this.customer, this.touchpoint, products);
+		CustomerTransaction transaction = new CustomerTransaction(
+				this.customer, this.touchpoint, products);
 		transaction.setCompleted(true);
 		customerTracking.createTransaction(transaction);
 

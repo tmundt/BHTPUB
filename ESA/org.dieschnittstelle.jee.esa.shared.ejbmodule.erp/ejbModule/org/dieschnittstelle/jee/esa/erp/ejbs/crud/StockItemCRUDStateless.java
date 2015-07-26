@@ -68,4 +68,17 @@ public class StockItemCRUDStateless implements StockItemCRUDLocal {
 		return em.createQuery("FROM StockItem").getResultList();
 	}
 
+	@Override
+	public void setPriceForStockItem(AbstractProduct prod, PointOfSale pos, int price) {
+		System.out.println("------SETPRICEFORSTOCKITEM------------");
+		List<StockItem> stockItemList = readStockItemForPointOfSale(pos);
+		for (StockItem item: stockItemList) {
+			if(item.getProduct().getId() == prod.getId()) {
+				item.setPrice(price);
+				updateStockItem(item);
+			}
+		}
+
+	}
+
 }

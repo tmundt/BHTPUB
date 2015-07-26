@@ -13,6 +13,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.dieschnittstelle.jee.esa.crm.ejbs.TouchpointAccessLocal;
 import org.dieschnittstelle.jee.esa.crm.entities.AbstractTouchpoint;
 import org.dieschnittstelle.jee.esa.erp.ejbs.StockSystemLocal;
 import org.dieschnittstelle.jee.esa.erp.entities.IndividualisedProductItem;
@@ -55,6 +56,8 @@ public class StockSystemViewController {
 	 * .shared.ejbmodule.crm/TouchpointAccessStateless
 	 * !org.dieschnittstelle.jee.esa.crm.ejbs.TouchpointAccessLocal
 	 */
+	@Resource(mappedName="java:global/org.dieschnittstelle.jee.esa.ejbs/org.dieschnittstelle.jee.esa.shared.ejbmodule.crm/TouchpointAccessStateless!org.dieschnittstelle.jee.esa.crm.ejbs.TouchpointAccessLocal")
+	private TouchpointAccessLocal touchpointBean;
 
 	/*
 	 * these are local structures created from the data read out from the beans
@@ -126,18 +129,14 @@ public class StockSystemViewController {
 		 */
 		StockItemWrapper item = stockItemsMap.get(itemId);
 		System.out.println("Stockitem ist: " + item);
-		/*
-		 * TODO: we use the units diff on StockItemWrapper for determining the number
-		 * of units to add and call the add method on stockSystem
-		 */
-		//stockSystemEJB.getAllProductsOnStock().
 		
-
+		
 		/*
 		 * TODO: once we are done we call the updateMethods on the item to set the new
 		 * value of price on the StockItem object itself
 		 */
-		item.setPrice(item.getPrice());
+		//item.setPrice(item.getPrice());
+		stockSystemEJB.setPriceForProductOnStock(item.getProduct(), item.getPos(), item.getPrice());
 
 		/* returning the empty string here results in keeping the current view */
 		return "";
@@ -179,13 +178,13 @@ public class StockSystemViewController {
 			StockItemWrapper wrapper = new StockItemWrapper(item);
 			this.stockItemsMap.put(wrapper.getId(), wrapper);
 		}
-//
+
 //		/* also read out the touchpoints */
-//		for (AbstractTouchpoint tp : touchpointBean.readAllTouchpoints()) {
-//			if (!this.touchpointsMap.containsKey(tp.getErpPointOfSaleId())) {
-//				this.touchpointsMap.put(tp.getErpPointOfSaleId(), tp);
-//			}
-//		}
+		for (AbstractTouchpoint tp : touchpointBean.readAllTouchpoints()) {
+			if (!this.touchpointsMap.containsKey(tp.getErpPointOfSaleId())) {
+				this.touchpointsMap.put(tp.getErpPointOfSaleId(), tp);
+			}
+		}
 	}
 
 	/*

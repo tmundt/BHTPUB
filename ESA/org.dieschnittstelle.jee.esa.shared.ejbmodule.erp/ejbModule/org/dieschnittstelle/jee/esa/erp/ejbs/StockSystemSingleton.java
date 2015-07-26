@@ -10,6 +10,7 @@ import javax.ejb.TransactionAttributeType;
 
 import org.dieschnittstelle.jee.esa.erp.ejbs.crud.PointOfSaleCRUDLocal;
 import org.dieschnittstelle.jee.esa.erp.ejbs.crud.StockItemCRUDLocal;
+import org.dieschnittstelle.jee.esa.erp.entities.AbstractProduct;
 import org.dieschnittstelle.jee.esa.erp.entities.IndividualisedProductItem;
 import org.dieschnittstelle.jee.esa.erp.entities.PointOfSale;
 import org.dieschnittstelle.jee.esa.erp.entities.StockItem;
@@ -35,10 +36,19 @@ public class StockSystemSingleton implements StockSystemRemote, StockSystemLocal
 			int pointOfSaleId, int units) {
 		show("EJB StockSystemStateless,addToStock(), product: " + product +  "pointOfSaleID: "+ pointOfSaleId);
 		
+		
 		// TODO: JPA storing/access
 		PointOfSale pos = posCRUD.readPointOfSale(pointOfSaleId);
-		StockItem item = new StockItem(product, pos, units);	
-		stockCRUD.createStockItem(item);
+		
+		StockItem item = stockCRUD.readStockItem(product, pos);
+		
+		if(item == null) {	
+			item = new StockItem(product, pos, units);
+			stockCRUD.createStockItem(item);	
+		} else {
+			item.setUnits(item.getUnits()+ units);
+			stockCRUD.updateStockItem(item);
+		}	
 	}
 
 	@Override
@@ -119,4 +129,12 @@ public class StockSystemSingleton implements StockSystemRemote, StockSystemLocal
 	public List<StockItem> getCompleteStock() {
 		return stockCRUD.getAllStockItems();
 	}
+
+	@Override
+	public void setPriceForProductOnStock(AbstractProduct prod,
+			PointOfSale pos, int price) {
+		stockCRUD.setPriceForStockItem(prod, pos, price);	
+	}
+	
+	
 }

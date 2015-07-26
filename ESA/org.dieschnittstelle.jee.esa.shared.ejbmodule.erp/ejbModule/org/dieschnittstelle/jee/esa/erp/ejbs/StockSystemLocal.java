@@ -4,7 +4,9 @@ import java.util.List;
 
 import javax.ejb.Local;
 
+import org.dieschnittstelle.jee.esa.erp.entities.AbstractProduct;
 import org.dieschnittstelle.jee.esa.erp.entities.IndividualisedProductItem;
+import org.dieschnittstelle.jee.esa.erp.entities.PointOfSale;
 import org.dieschnittstelle.jee.esa.erp.entities.StockItem;
 
 @Local
@@ -68,5 +70,7 @@ public interface StockSystemLocal {
 	public List<Integer> getPointsOfSale(IndividualisedProductItem product);
 	
 	public List<StockItem> getCompleteStock();
+	
+	public void setPriceForProductOnStock(AbstractProduct prod, PointOfSale pos, int price);
 
 }
