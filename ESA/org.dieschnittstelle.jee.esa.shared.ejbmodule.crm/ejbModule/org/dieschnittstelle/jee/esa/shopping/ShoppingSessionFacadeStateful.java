@@ -13,6 +13,7 @@ import org.dieschnittstelle.jee.esa.crm.entities.AbstractTouchpoint;
 import org.dieschnittstelle.jee.esa.crm.entities.CrmProductBundle;
 import org.dieschnittstelle.jee.esa.crm.entities.Customer;
 import org.dieschnittstelle.jee.esa.crm.entities.CustomerTransaction;
+import org.dieschnittstelle.jee.esa.erp.ejbs.StockSystemLocal;
 import org.dieschnittstelle.jee.esa.erp.entities.AbstractProduct;
 import org.dieschnittstelle.jee.esa.erp.entities.Campaign;
 
@@ -34,6 +35,9 @@ public class ShoppingSessionFacadeStateful implements
 
 	@EJB
 	private CampaignTrackingLocal campaignTracking;
+	
+	@EJB
+	private StockSystemLocal stockSystem;
 
 	/**
 	 * the customer
@@ -138,6 +142,16 @@ public class ShoppingSessionFacadeStateful implements
 		customerTracking.createTransaction(transaction);
 
 		System.out.println("purchase(): done.\n");
+	}
+	/**
+	 * Check and remove products from stock
+	 * check: check amount of available products on stock
+	 * remove: remove the items from the stock
+	 */
+	@Override
+	public void checkAndRemoveProductsFromStock() {
+		//this.shoppingCart.getProductBundles()
+		//stockSystem.getTotalUnitsOnStock(product)
 	}
 
 }

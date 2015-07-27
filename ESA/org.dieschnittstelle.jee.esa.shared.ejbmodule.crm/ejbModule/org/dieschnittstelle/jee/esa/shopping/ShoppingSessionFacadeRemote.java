@@ -17,4 +17,6 @@ public interface ShoppingSessionFacadeRemote {
 	
 	public void purchase();
 	
+	public void checkAndRemoveProductsFromStock();
+	
 }
