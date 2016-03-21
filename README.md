@@ -1,10 +1,10 @@
 BHTPUB
 ======
 
-warehouse management system
-exercise application in module "E-Business"/Beuth Hochschule Berlin
+article management system
+application in module "E-Business"/Beuth Hochschule Berlin
 
-technologies:
+Used Technologies:
 
 - JavaEE, EJB
 - Wildfly-Server
